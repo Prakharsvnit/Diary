@@ -1,6 +1,6 @@
 from run import app,db
 from models import Note
-from flask import render_template,redirect,url_for,request
+from flask import render_template,redirect,url_for,request, jsonify
 
 @app.route("/all")
 def all_posts():
@@ -19,6 +19,7 @@ def delete_post(post_id):
 	db.session.commit()
 
 	return redirect(url_for('all_posts'))
+
 
 @app.route('/edit/<int:post_id>' , methods=['POST', 'GET'])
 def edit_post(post_id):
@@ -50,3 +51,14 @@ def create_note():
         db.session.commit()
 
         return redirect(url_for('all_posts')) 
+
+@app.route("/all/JSON")
+def postsJSON():
+    posts = Note.query.all()
+    return jsonify(posts=[p.serialize for p in posts])
+
+@app.route("/post/<int:post_id>/JSON")
+def entryJSON(post_id):
+    entry = Note.query.filter_by(id=post_id).one()   
+    return jsonify(entry.serialize)
+
