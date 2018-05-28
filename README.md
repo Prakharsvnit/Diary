@@ -5,7 +5,7 @@ This is simple CRUD app made with Flask and SQLALChemy.You can run this web app 
 
 2.Now,change your current directory to Diary by typing command: cd Diary
 
-3.Install the dependencies by typing command: pip install -r requirements.txt
+3.Install the dependencies by typing command: pip3 install -r requirements.txt
 
 4. You need to run this command to start the web-app: python run.py
 
